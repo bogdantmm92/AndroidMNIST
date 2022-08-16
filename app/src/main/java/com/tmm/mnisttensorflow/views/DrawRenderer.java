@@ -42,7 +42,7 @@ public class DrawRenderer {
                                    int startLineIndex) {
         //minimize distortion artifacts
         paint.setAntiAlias(true);
-        paint.setStrokeWidth(2);
+        paint.setStrokeWidth(1);
         paint.setFilterBitmap(true);
 
         //get the size of the line to draw
