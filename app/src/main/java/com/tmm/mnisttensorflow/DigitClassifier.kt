@@ -49,7 +49,7 @@ class DigitClassifier(private val context: Context) {
 
     // Initialize TF Lite Interpreter with NNAPI enabled
     val options = Interpreter.Options()
-    options.setUseNNAPI(true)
+    // options.setUseNNAPI(true)
     val interpreter = Interpreter(model, options)
 
     // Read input shape from model file
