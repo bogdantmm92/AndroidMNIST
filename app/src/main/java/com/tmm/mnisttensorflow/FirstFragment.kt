@@ -10,6 +10,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.tmm.mnisttensorflow.databinding.FragmentFirstBinding
 import com.tmm.mnisttensorflow.views.DrawModel
+import java.io.File
+import java.io.FileOutputStream
+import java.util.Arrays
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -55,9 +58,19 @@ class FirstFragment : Fragment() {
             binding.tfRes.setText("")
         }
 
+        val data = mutableListOf<String>()
+        binding.btnAdd.setOnClickListener {
+            data.add(Arrays.toString(binding.drawView.pixelData))
+            data.add("[${binding.label.text.toString()}]")
+        }
+        binding.btnSave.setOnClickListener {
+            saveFile(data)
+        }
         binding.btnClass.setOnClickListener {
             digitClassifier.classifyAsync(binding.drawView.bitmap, binding.drawView.pixelData)
-                .addOnSuccessListener { resultText -> binding.tfRes.text = resultText }
+                .addOnSuccessListener { resultText ->
+                    binding.tfRes.text = resultText
+                }
             .addOnFailureListener { e ->
                 binding.tfRes.text = e.localizedMessage
                 Log.e("yyy", "Error classifying drawing.", e)
@@ -100,6 +113,16 @@ class FirstFragment : Fragment() {
         super.onPause()
     }
 
+    private fun saveFile(list: MutableList<String>) {
+        val path = requireContext().getExternalFilesDir(null)
+        val file = File(path, "android_mnist_examples.json")
+        val stream = FileOutputStream(file)
+        try {
+            stream.write(list.joinToString(",\n").toByteArray())
+        } finally {
+            stream.close()
+        }
+    }
     //draw line down
     private fun processTouchDown(event: MotionEvent) {
         //calculate the x, y coordinates where the user has touched

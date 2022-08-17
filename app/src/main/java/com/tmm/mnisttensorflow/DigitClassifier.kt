@@ -1,13 +1,9 @@
 package com.tmm.mnisttensorflow
 
-import android.R.attr.label
-import android.content.ClipData
-import android.content.ClipboardManager
 import android.content.Context
 import android.content.res.AssetManager
 import android.graphics.Bitmap
 import android.util.Log
-import androidx.core.content.ContextCompat.getSystemService
 import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.TaskCompletionSource
 import org.tensorflow.lite.Interpreter
@@ -92,11 +88,6 @@ class DigitClassifier(private val context: Context) {
 
     val pixels0 = convertBitmapToPixels(bitmap)
     val byteBuffer = convertPixelsToByteBuffer(pixels)
-
-    // Copy to clipboard
-    val clipboard = getSystemService(context, ClipboardManager::class.java)
-    val clip = ClipData.newPlainText("Pixels", Arrays.toString(pixels))
-    clipboard?.setPrimaryClip(clip)
 
     Log.d("YYYY", Arrays.toString(pixels))
     elapsedTime = (System.nanoTime() - startTime) / 1000000
