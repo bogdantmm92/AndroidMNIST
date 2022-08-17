@@ -62,19 +62,7 @@ class FirstFragment : Fragment() {
         binding.btnAdd.setOnClickListener {
             data.add(Arrays.toString(binding.drawView.pixelData))
             data.add("[${binding.label.text.toString()}]")
-        }
-        binding.btnSave.setOnClickListener {
             saveFile(data)
-        }
-        binding.btnClass.setOnClickListener {
-            digitClassifier.classifyAsync(binding.drawView.bitmap, binding.drawView.pixelData)
-                .addOnSuccessListener { resultText ->
-                    binding.tfRes.text = resultText
-                }
-            .addOnFailureListener { e ->
-                binding.tfRes.text = e.localizedMessage
-                Log.e("yyy", "Error classifying drawing.", e)
-            }
         }
 
         binding.drawView.setOnTouchListener { view, event ->
@@ -91,10 +79,22 @@ class FirstFragment : Fragment() {
                 //if finger is lifted, stop drawing
             } else if (action == MotionEvent.ACTION_UP) {
                 processTouchUp()
+                classify()
                 return@setOnTouchListener true
             }
             return@setOnTouchListener false
         }
+    }
+
+    private fun classify() {
+        digitClassifier.classifyAsync(binding.drawView.bitmap, binding.drawView.pixelData)
+            .addOnSuccessListener { resultText ->
+                binding.tfRes.text = resultText
+            }
+            .addOnFailureListener { e ->
+                binding.tfRes.text = e.localizedMessage
+                Log.e("yyy", "Error classifying drawing.", e)
+            }
     }
 
     override fun onDestroyView() {
