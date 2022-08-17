@@ -39,18 +39,12 @@
         android:orientation="horizontal"
         >
 
-        <EditText
+        <TextView
             android:id="@+id/label"
             android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:textAlignment="center"
             android:text="0"/>
-        <Button
-            android:id="@+id/btn_add"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Add"
-            />
     </LinearLayout>
     <TextView
         android:id="@+id/tfRes"

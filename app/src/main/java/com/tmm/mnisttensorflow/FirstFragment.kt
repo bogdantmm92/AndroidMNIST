@@ -51,18 +51,16 @@ class FirstFragment : Fragment() {
         binding.drawView.setModel(drawModel)
 
         binding.btnClear.setOnClickListener {
+            data.add(Arrays.toString(binding.drawView.pixelData))
+            data.add("[${binding.label.text.toString()}]")
+            saveFile(data)
+            binding.label.text = ((binding.label.text.toString().toInt() + 1) % 10).toString()
+
             drawModel.clear()
             binding.drawView.reset()
             binding.drawView.invalidate()
 
             binding.tfRes.setText("")
-        }
-
-        val data = mutableListOf<String>()
-        binding.btnAdd.setOnClickListener {
-            data.add(Arrays.toString(binding.drawView.pixelData))
-            data.add("[${binding.label.text.toString()}]")
-            saveFile(data)
         }
 
         binding.drawView.setOnTouchListener { view, event ->
@@ -86,6 +84,7 @@ class FirstFragment : Fragment() {
         }
     }
 
+    private val data = mutableListOf<String>()
     private fun classify() {
         digitClassifier.classifyAsync(binding.drawView.bitmap, binding.drawView.pixelData)
             .addOnSuccessListener { resultText ->
