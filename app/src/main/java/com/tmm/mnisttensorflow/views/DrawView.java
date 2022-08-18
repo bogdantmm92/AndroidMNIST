@@ -122,6 +122,11 @@ public class DrawView extends View {
         mDrawnLineSize = mModel.getLineSize();
     }
 
+    @Override
+    public void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, widthMeasureSpec);
+    }
+
     /**
      * Convert screen position to local pos (pos in bitmap)
      */

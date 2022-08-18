@@ -12,12 +12,16 @@
     tools:context=".MainActivity"
     >
 
-    <com.tmm.mnisttensorflow.views.DrawView
-        android:id="@+id/drawView"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        />
+        android:layout_height="wrap_content"
+        android:elevation="10dp">
+        <com.tmm.mnisttensorflow.views.DrawView
+            android:id="@+id/drawView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+    </androidx.cardview.widget.CardView>
 
     <LinearLayout
         android:layout_width="match_parent"
