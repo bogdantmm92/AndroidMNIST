@@ -41,8 +41,8 @@ class FirstFragment : Fragment() {
             .addOnFailureListener { e -> Log.e("yyy", "Error to setting up digit classifier.", e) }
 
         binding.drawView.setStrokeWidth(50.0f)
-        binding.drawView.setColor(Color.WHITE)
-        binding.drawView.setBackgroundColor(Color.BLACK)
+        binding.drawView.setColor(Color.BLACK)
+        binding.drawView.setBackgroundColor(Color.WHITE)
 
         binding.drawView.setOnTouchListener { _, event ->
             // As we have interrupted DrawView's touch event,
